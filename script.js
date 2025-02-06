@@ -29,7 +29,7 @@ const data = [
     ],
   },
   {
-    question: "The sternum is (     ) to the heart.",
+    question: "The sternum is located ____ to the heart.",
     answers: [
       { text: "Posterior", correct: false },
       { text: "Anterior", correct: true },
@@ -100,7 +100,7 @@ const data = [
     question:
       "Components of the central nervous system include all of the following except the:",
     answers: [
-      { text: "Spinal nerves", correct: false },
+      { text: "Spinal nerves", correct: true },
       { text: "Diencephalon", correct: false },
       { text: "Spinal cord", correct: false },
       { text: "Cerebellum", correct: false },
@@ -242,12 +242,12 @@ function nextBtnState() {
     };
   } else {
     nextBtn.innerText = "Next";
-    nextBtn.style.backgroundColor = "rgb(70, 70, 179)";
+    nextBtn.style.backgroundColor = "#31473A";
     nextBtn.onmouseover = () => {
       nextBtn.style.backgroundColor = "green";
     };
     nextBtn.onmouseleave = () => {
-      nextBtn.style.backgroundColor = "rgb(70, 70, 179)";
+      nextBtn.style.backgroundColor = "#31473A";
     };
   }
 }
@@ -259,11 +259,11 @@ function chooseAnswer(e) {
   // Remove border from the previous choice
   if (states[currentIndex].lastChoice) {
     states[currentIndex].lastChoice.style.border =
-      "3px solid rgba(61, 60, 60, 0.7)";
+      "3px solid #7c7c7c";
   }
 
   // Add border to the current choice
-  button.style.border = "3px solid rgb(70, 70, 179)";
+  button.style.border = "3px solid green";
   states[currentIndex].lastChoice = button;
   states[currentIndex].userChoice = button;
 
@@ -309,12 +309,12 @@ function takeQuiz() {
   resultH3.style.display = "none";
   backBtn.style.display = "block";
   options.style.display = "block";
-  nextBtn.style.backgroundColor = "rgb(70, 70, 179)";
+  nextBtn.style.backgroundColor = "#31473A";
   nextBtn.onmouseover = () => {
     nextBtn.style.backgroundColor = "green";
   };
   nextBtn.onmouseleave = () => {
-    nextBtn.style.backgroundColor = "rgb(70, 70, 179)";
+    nextBtn.style.backgroundColor = "#31473A";
   };
   setQuestionAndAnswers();
 }
@@ -348,7 +348,7 @@ function setQuestionAndAnswers() {
       states[currentIndex].userChoice &&
       states[currentIndex].userChoice.innerText === answer.text
     ) {
-      button.style.border = "3px solid rgb(70, 70, 179)";
+      button.style.border = "3px solid green";
       states[currentIndex].lastChoice = button;
     }
   });
@@ -361,6 +361,7 @@ function setQuestionAndAnswers() {
 }
 
 function showScore() {
+  // Show the users score
   nextBtn.innerText = "Retake Quiz";
   const remark =
     score <= 5
@@ -387,17 +388,18 @@ function showScore() {
   backBtn.style.display = "none";
   options.style.display = "none";
   questionNo.innerText = score.toString();
-  nextBtn.style.backgroundColor = "rgb(70, 70, 179)";
+  nextBtn.style.backgroundColor = "#31473A";
 
   nextBtn.onmouseover = () => {
     nextBtn.style.backgroundColor = "green";
   };
   nextBtn.onmouseleave = () => {
-    nextBtn.style.backgroundColor = "rgb(70, 70, 179)";
+    nextBtn.style.backgroundColor = "#31473A";
   };
 }
 
 function ShowNextQuestion() {
+  // Determines if Quiz is over.
   currentIndex++;
 
   if (currentIndex < data.length) {
@@ -407,7 +409,7 @@ function ShowNextQuestion() {
   }
 }
 
-// Function to go to the next question
+// Function to go to the next question.
 nextBtn.onclick = () => {
   if (currentIndex < data.length) {
     ShowNextQuestion();
