@@ -204,11 +204,12 @@ const questionNo = document.getElementById("number");
 const questionLength = document.getElementById("remainingQuestions");
 const currentQuestion = document.getElementById("question");
 const options = document.getElementById("answers");
-const s = document.getElementById("score");
 const nextBtn = document.getElementById("next");
 const backBtn = document.getElementById("back");
 const result = document.getElementById("result");
 const resultH3 = document.getElementById("resultH3");
+const startQuizBtn = document.getElementById("homeBtn");
+const scoreTracker = document.getElementById("scoreTracker");
 
 // Setup Quiz Variable
 let currentIndex = 0;
@@ -258,8 +259,7 @@ function chooseAnswer(e) {
 
   // Remove border from the previous choice
   if (states[currentIndex].lastChoice) {
-    states[currentIndex].lastChoice.style.border =
-      "3px solid #7c7c7c";
+    states[currentIndex].lastChoice.style.border = "3px solid #7c7c7c";
   }
 
   // Add border to the current choice
@@ -289,7 +289,6 @@ function chooseAnswer(e) {
     }
   }
 
-  s.innerText = score.toString();
   states[currentIndex].questionAnswered = true;
   states[currentIndex].previousChoice = isCorrect;
 }
@@ -308,6 +307,8 @@ function takeQuiz() {
   // Reset DOM variables
   resultH3.style.display = "none";
   backBtn.style.display = "block";
+  nextBtn.style.display = "block";
+  scoreTracker.style.display = "block";
   options.style.display = "block";
   nextBtn.style.backgroundColor = "#31473A";
   nextBtn.onmouseover = () => {
@@ -332,32 +333,38 @@ function setQuestionAndAnswers() {
   currentQuestion.innerText = data[currentIndex].question;
 
   // Set Options
-  data[currentIndex].answers.forEach((answer) => {
-    const button = document.createElement("button");
-    button.innerText = answer.text;
-    options.appendChild(button);
+  data[currentIndex].answers
+    .sort(() => Math.random() - 0.5)
+    .forEach((answer, index) => {
+      const button = document.createElement("button");
+      let num = index + 1; //Option number
 
-    // Get user's answer
-    if (answer.correct) {
-      button.dataset.correct = answer.correct;
-    }
-    button.addEventListener("click", chooseAnswer);
+      button.innerText = `${num}. ${answer.text}`;
+      options.appendChild(button);
 
-    // Restore state for the current question
-    if (
-      states[currentIndex].userChoice &&
-      states[currentIndex].userChoice.innerText === answer.text
-    ) {
-      button.style.border = "3px solid green";
-      states[currentIndex].lastChoice = button;
-    }
-  });
+      // Get user's answer
+      if (answer.correct) {
+        button.dataset.correct = answer.correct;
+      }
+      button.addEventListener("click", chooseAnswer);
+
+      // Restore state for the current question
+      if (
+        states[currentIndex].userChoice &&
+        states[currentIndex].userChoice.innerText === answer.text
+      ) {
+        button.style.border = "3px solid green";
+        states[currentIndex].lastChoice = button;
+      }
+    });
 
   // Back btn state
   backBtnState();
 
   // Next Btn State
   nextBtnState();
+
+  startQuizBtn.style.display = "none";
 }
 
 function showScore() {
@@ -399,9 +406,9 @@ function showScore() {
 }
 
 function ShowNextQuestion() {
-  // Determines if Quiz is over.
   currentIndex++;
 
+  // Determine if Quiz is over.
   if (currentIndex < data.length) {
     setQuestionAndAnswers();
   } else {
@@ -426,4 +433,15 @@ backBtn.onclick = () => {
   }
 };
 
-takeQuiz();
+// Home Page
+function startPage() {
+  currentQuestion.innerHTML = `<div>
+    <h2>Anatomy 101 Quiz! </h2>
+    <p class="p">Click start Quiz button when you are ready to start the quiz. GoodLuck  </p>
+   </div>`;
+  nextBtn.style.display = "none";
+  backBtn.style.display = "none";
+  scoreTracker.style.display = "none";
+}
+
+startPage();

@@ -22,6 +22,22 @@ body {
   justify-content: center;
 }
 
+.header button#homeBtn {
+  margin-top: 20px;
+  transition: background-color 1s;
+  background-color: green;
+}
+
+.p {
+  font-size: 1rem;
+  margin-top: 10px;
+  line-height: 1.2;
+}
+
+.header button#homeBtn:hover {
+  background-color: black;
+}
+
 /* Styles for the Questions */
 
 .header {
@@ -29,7 +45,7 @@ body {
   width: 90%;
   margin: 30px auto 0;
   line-height: 1.2;
-  background-color: #31473A;
+  background-color: #31473a;
   border-radius: 30px;
   padding: 40px 20px 0;
   text-align: center;
@@ -42,7 +58,7 @@ body {
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   padding: 18px 12.5px;
-  border: 5px solid #EDF4F2;
+  border: 5px solid #edf4f2;
   border-radius: 50%;
   top: 0px;
   left: 50%;
@@ -53,7 +69,7 @@ body {
   margin-top: 10px;
 }
 
-#resultH3{
+#resultH3 {
   display: none;
 }
 
@@ -78,10 +94,9 @@ body {
 }
 
 #answers button:hover {
-  border: 3px solid #FBEAE7;
+  border: 3px solid #fbeae7;
   cursor: pointer;
 }
-
 
 /* Prev and Next Btns */
 
@@ -92,10 +107,11 @@ body {
   justify-content: space-evenly;
 }
 
-.footer button {
+.footer button,
+#homeBtn {
   padding: 10px 25px;
   border-radius: 5px;
-  background-color: #31473A;
+  background-color: #31473a;
   border: none;
   color: rgb(219, 215, 215);
   font-size: 1rem;
@@ -108,4 +124,3 @@ body {
   background-color: green;
   cursor: pointer;
 }
-
