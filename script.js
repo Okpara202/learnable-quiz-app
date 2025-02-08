@@ -349,13 +349,14 @@ function setQuestionAndAnswers() {
       button.addEventListener("click", chooseAnswer);
 
       // Restore state for the current question
-      if (
-        states[currentIndex].userChoice &&
-        states[currentIndex].userChoice.innerText === answer.text
-      ) {
-        button.style.border = "3px solid green";
-        states[currentIndex].lastChoice = button;
+      if (states[currentIndex].userChoice) {
+        if (states[currentIndex].userChoice.dataset.answer === answer.text) {
+          button.style.border = "3px solid green";
+          states[currentIndex].lastChoice = button;
+        }
       }
+
+      button.dataset.answer = answer.text;
     });
 
   // Back btn state
